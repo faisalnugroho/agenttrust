@@ -10,7 +10,7 @@ import {
 import { localnet } from "genlayer-js/chains";
 
 export default async function main(client: GenLayerClient<any>) {
-  const filePath = path.resolve(process.cwd(), "contracts/football_bets.py");
+  const filePath = path.resolve(process.cwd(), "contracts/agent_trust.py");
 
   try {
     const contractCode = new Uint8Array(readFileSync(filePath));
@@ -40,10 +40,16 @@ export default async function main(client: GenLayerClient<any>) {
     const deployedContractAddress =
       (client.chain as GenLayerChain).id === localnet.id
         ? receipt.data.contract_address
-        : (receipt.txDataDecoded as DecodedDeployData)?.contractAddress;
+        : (receipt.data as DecodedDeployData).contract_address;
 
-    console.log(`Contract deployed at address: ${deployedContractAddress}`);
+    console.log(`\n✅ AgentTrust contract deployed successfully!`);
+    console.log(`   Contract Address: ${deployedContractAddress}`);
+    console.log(`   Transaction Hash: ${deployTransaction}`);
+    console.log(`   Status: ${receipt.statusName}`);
+    console.log(`\n📝 Copy this to your frontend/.env:`);
+    console.log(`   NEXT_PUBLIC_CONTRACT_ADDRESS=${deployedContractAddress}`);
   } catch (error) {
-    throw new Error(`Error during deployment:, ${error}`);
+    console.error("❌ Deployment failed:", error);
+    throw error;
   }
 }
