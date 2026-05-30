@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 import { Logo } from "./Logo";
 
 export function Navbar() {
-  const { address, isConnected, connect, disconnect } = useWallet();
+  const { address, isConnected, connectWallet, disconnectWallet } = useWallet();
 
   return (
     <nav className="border-b border-[#1a1a2e] bg-[#0a0a0f]/80 backdrop-blur-xl sticky top-0 z-50">
@@ -25,7 +25,7 @@ export function Navbar() {
               <Button
                 variant="outline"
                 size="sm"
-                onClick={disconnect}
+                onClick={disconnectWallet}
                 className="border-[#1a1a2e] text-gray-300 hover:bg-[#1a1a2e]"
               >
                 Disconnect
@@ -34,7 +34,7 @@ export function Navbar() {
           ) : (
             <Button
               size="sm"
-              onClick={connect}
+              onClick={connectWallet}
               className="bg-[#6366f1] hover:bg-[#5558e6] text-white"
             >
               Connect

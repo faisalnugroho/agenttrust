@@ -93,7 +93,7 @@ export function useRegisterAgent() {
       success("Agent registered successfully!");
     },
     onError: (err: Error) => {
-      error("Registration failed", err.message);
+      error("Registration failed: " + err.message);
     },
   });
 }
@@ -120,7 +120,7 @@ export function useCreateTask() {
       success("Task created successfully!");
     },
     onError: (err: Error) => {
-      error("Task creation failed", err.message);
+      error("Task creation failed: " + err.message);
     },
   });
 }
@@ -148,7 +148,7 @@ export function useCompleteTask() {
       success("Task completed! AI evaluation in progress...");
     },
     onError: (err: Error) => {
-      error("Task completion failed", err.message);
+      error("Task completion failed: " + err.message);
     },
   });
 }
@@ -168,7 +168,7 @@ export function useApproveTask() {
       success("Task approved! Payment sent to agent.");
     },
     onError: (err: Error) => {
-      error("Approval failed", err.message);
+      error("Approval failed: " + err.message);
     },
   });
 }

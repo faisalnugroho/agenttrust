@@ -2,7 +2,8 @@
 
 import { createClient } from "genlayer-js";
 import { studionet } from "genlayer-js/chains";
-import { createWalletClient, custom, type WalletClient } from "viem";
+import { createWalletClient, custom } from "viem";
+import type { WalletClient } from "viem";
 
 // GenLayer Network Configuration (from environment variables with fallbacks)
 export const GENLAYER_CHAIN_ID = parseInt(process.env.NEXT_PUBLIC_GENLAYER_CHAIN_ID || "61999");
@@ -272,7 +273,7 @@ export async function switchAccount(): Promise<string> {
 /**
  * Create a viem wallet client from MetaMask provider
  */
-export function createMetaMaskWalletClient(): WalletClient | null {
+export function createMetaMaskWalletClient(): ReturnType<typeof createWalletClient> | null {
   const provider = getEthereumProvider();
 
   if (!provider) {

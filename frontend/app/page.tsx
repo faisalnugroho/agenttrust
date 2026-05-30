@@ -32,7 +32,7 @@ import { Navbar } from "../components/Navbar";
 import { AccountPanel } from "../components/AccountPanel";
 
 export default function Home() {
-  const { address, isConnected, connect } = useWallet();
+  const { address, isConnected, connectWallet } = useWallet();
   const { data: stats } = usePlatformStats();
   const { data: myAgent } = useAgent(address ?? null);
   const { data: myTaskIds } = useAgentTasks(address ?? null);
@@ -89,7 +89,7 @@ export default function Home() {
         <div className="flex flex-wrap gap-3 mb-8">
           {!isConnected ? (
             <Button
-              onClick={connect}
+              onClick={connectWallet}
               className="bg-[#6366f1] hover:bg-[#5558e6] text-white"
             >
               Connect Wallet
@@ -181,7 +181,6 @@ export default function Home() {
             <TaskDetails
               taskId={taskLookup}
               onComplete={(id) => setShowCompleteTask(id)}
-              onApprove={undefined}
             />
           )}
         </div>

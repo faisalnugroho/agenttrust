@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { User, LogOut, AlertCircle, ExternalLink } from "lucide-react";
 import { useWallet } from "@/lib/genlayer/wallet";
-import { usePlayerPoints } from "@/lib/hooks/useFootballBets";
+import { useAgent } from "@/lib/hooks/useAgentTrust";
 import { success, error, userRejected } from "@/lib/utils/toast";
 import { AddressDisplay } from "./AddressDisplay";
 import { Button } from "./ui/button";
@@ -31,7 +31,7 @@ export function AccountPanel() {
     switchWalletAccount,
   } = useWallet();
 
-  const { data: points = 0 } = usePlayerPoints(address);
+  const { data: agent } = useAgent(address); const points = agent?.reputation_score || 0;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [connectionError, setConnectionError] = useState("");
